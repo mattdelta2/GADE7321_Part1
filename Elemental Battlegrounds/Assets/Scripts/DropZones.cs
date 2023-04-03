@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class DropZones : MonoBehaviour
+public class DropZones : MonoBehaviour, IPointerEnterHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CardManager.LastEnteredDropZone = transform;
     }
 }
