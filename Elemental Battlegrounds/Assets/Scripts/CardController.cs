@@ -8,12 +8,12 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 {
     public void OnBeginDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        transform.SetParent(transform.root);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
