@@ -2,33 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="New Character", menuName ="Game/Character")]
-public class Characters : ScriptableObject
+
+public class Characters : MonoBehaviour
 {
-    public string CharacterName;
-    public CharacterClass characterClass;
-    public Card[] startingCards;
+    public string MonsterName;
+    public Sprite MonsterImage;
+    public string MonsterDescription;
+    public ElementType MonsterElement;
+
+    
 
 
 
 }
 
-public enum CharacterClass
+public enum ElementType
 {
     Earth,
     Water,
     Fire,
     Air,
     Plant,
-    Lighting,
-    Sun,
- 
-}
-[System.Serializable]
-public class Card
-{
-    public int Damage = 3;
-    
+    Lightning,
+    Sun
 }
 
 
