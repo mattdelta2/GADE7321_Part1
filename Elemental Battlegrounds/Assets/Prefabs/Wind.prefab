@@ -48,7 +48,7 @@ MonoBehaviour:
   MonsterName: Wind
   MonsterImage: {fileID: 0}
   MonsterDescription: Hone the power of the Wind
-  MonsterElement: 0
+  MonsterElement: 3
 --- !u!1 &5192610728852070877
 GameObject:
   m_ObjectHideFlags: 0
