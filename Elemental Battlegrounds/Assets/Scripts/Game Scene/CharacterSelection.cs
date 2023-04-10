@@ -71,9 +71,9 @@ public class CharacterSelection : MonoBehaviour
 
         if(SelectedElements.Count ==2)
         {
-            string[] elements = SelectedElements.ToArray();
+            //string[] elements = SelectedElements.ToArray();
             SaveManager saveManager = FindObjectOfType<SaveManager>();
-            saveManager.SaveElements(elements);
+            //saveManager.SaveElements(elements);
 
 
             SceneManager.LoadScene("GameScene");
@@ -99,7 +99,16 @@ public class CharacterSelection : MonoBehaviour
 
         UpdateSelectedElementsText();
     }
-    
+
+    public void SelectElement(ElementType element)
+    {
+        if (!SelectedElements.Contains(element))
+        {
+            SelectedElements.Add(element);
+            UpdateSelectedElementsText();
+        }
+    }
+
 
 
 }

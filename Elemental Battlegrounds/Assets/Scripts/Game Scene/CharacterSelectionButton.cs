@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class CharacterSelectionButton : MonoBehaviour
 {
     public ElementType element;
-     void Start()
+     public void Start()
     {
         GetComponent<Button>().onClick.AddListener(SelectElement);
         
     }
 
-    void SelectElement()
+    public void SelectElement()
     {
         CharacterSelection.Instance.UpdateSelectedElements(element);
         
