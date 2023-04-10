@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7503986350675995898}
+  - component: {fileID: 2697188614183262081}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2697188614183262081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369707442552661846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749581fcb5e78e6468b6069e40619e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterName: Wind
+  MonsterImage: {fileID: 0}
+  MonsterDescription: Hone the power of the Wind
+  MonsterElement: 0
 --- !u!1 &5192610728852070877
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Earth
+  m_text: '
 
 '
   m_isRightToLeft: 0

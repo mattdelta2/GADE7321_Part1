@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<ElementType> AvailableElements;
+    public List<ElementType> SelectedElements;
+
+
+
+    void start()
     {
-        
+        // Randomly select four elements from the list of available elements
+        int numElementsToSelect = 4;
+
+        while(SelectedElements.Count<numElementsToSelect && AvailableElements.Count >0)
+        {
+            int randomIndex = Random.Range(0, AvailableElements.Count);
+            ElementType randomElement = AvailableElements[randomIndex];
+            SelectedElements.Add(randomElement);
+            AvailableElements.RemoveAt(randomIndex);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
