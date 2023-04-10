@@ -48,7 +48,7 @@ MonoBehaviour:
   MonsterName: Sun
   MonsterImage: {fileID: 0}
   MonsterDescription: Hone the power of the Sun
-  MonsterElement: 6
+  MonsterElement: 0
 --- !u!1 &5192610728852070877
 GameObject:
   m_ObjectHideFlags: 0

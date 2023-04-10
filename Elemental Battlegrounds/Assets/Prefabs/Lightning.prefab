@@ -48,7 +48,7 @@ MonoBehaviour:
   MonsterName: Lightning
   MonsterImage: {fileID: 0}
   MonsterDescription: Hone the power of Lighting
-  MonsterElement: 5
+  MonsterElement: 0
 --- !u!1 &5192610728852070877
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   MonsterName: Water
   MonsterImage: {fileID: 0}
   MonsterDescription: Hone the power of Water
-  MonsterElement: 1
+  MonsterElement: 0
 --- !u!1 &5192610728852070877
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   MonsterName: Fire
   MonsterImage: {fileID: 0}
   MonsterDescription: Hone the power of Fire
-  MonsterElement: 2
+  MonsterElement: 0
 --- !u!1 &5192610728852070877
 GameObject:
   m_ObjectHideFlags: 0
