@@ -10,6 +10,7 @@ public class Characters : ScriptableObject
     public Card[] startingCards;
 
 
+
 }
 
 public enum CharacterClass
@@ -21,14 +22,13 @@ public enum CharacterClass
     Plant,
     Lighting,
     Sun,
-    Moon
+ 
 }
-
 [System.Serializable]
 public class Card
 {
-    public string CardName;
-    public string Description;
-    public int Attack;
-    public int Health;
+    public int Damage = 3;
+    
 }
+
+
