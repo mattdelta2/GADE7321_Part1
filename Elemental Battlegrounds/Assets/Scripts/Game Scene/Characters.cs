@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Characters : MonoBehaviour
+[CreateAssetMenu(fileName ="New Character", menuName ="Game/Character")]
+public class Characters : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string CharacterName;
+    public CharacterClass characterClass;
+    public Card[] startingCards;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+}
+
+public enum CharacterClass
+{
+    Earth,
+    Water,
+    Fire,
+    Air,
+    Plant,
+    Lighting,
+    Sun,
+    Moon
+}
+
+[System.Serializable]
+public class Card
+{
+    public string CardName;
+    public string Description;
+    public int Attack;
+    public int Health;
 }
