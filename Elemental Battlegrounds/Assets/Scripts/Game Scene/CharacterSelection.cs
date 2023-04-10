@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
@@ -12,6 +13,10 @@ public class CharacterSelection : MonoBehaviour
     public int maxSelectedElements = 2;
 
     private int numSelectedElements = 0;
+
+
+    public static CharacterSelection Instance { get; private set; }
+
 
 
 
@@ -61,6 +66,39 @@ public class CharacterSelection : MonoBehaviour
     }
 
 
+    public void StartGame()
+    {
+
+        if(SelectedElements.Count ==2)
+        {
+            string[] elements = SelectedElements.ToArray();
+            SaveManager saveManager = FindObjectOfType<SaveManager>();
+            saveManager.SaveElements(elements);
+
+
+            SceneManager.LoadScene("GameScene");
+
+        }
+        else
+        {
+            Debug.Log("Please select exactly 2 elements");
+        }
+    }
+
+    public void UpdateSelectedElements(ElementType element)
+    {
+        if(SelectedElements.Contains(element))
+        {
+            SelectedElements.Remove(element);
+
+        }
+        else if (SelectedElements.Count<2)
+        {
+            SelectedElements.Add(element);
+        }
+
+        UpdateSelectedElementsText();
+    }
     
 
 
