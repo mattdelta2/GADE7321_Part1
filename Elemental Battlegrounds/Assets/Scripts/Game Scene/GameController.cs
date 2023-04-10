@@ -18,6 +18,9 @@ public class GameController : MonoBehaviour
     public bool gameOver = false;
     public int[] elementCount = new int[7];
 
+    private int currentPlayerIndex = 0;
+    public int NumPlayers { get; set; }
+
     void Awake()
     {
         if (Instance == null)
@@ -53,7 +56,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < availableElements.Length; i++)
         {
             GameObject newElement = Instantiate(elements[availableElements[i]], new Vector3(-2.5f + i * 2, 2, 0), Quaternion.identity);
-            newElement.GetComponent<Element>().index = i;
+            newElement.GetComponent<ElementType>().index = i;
         }
 
         currentTurn = Random.Range(1, 3);
@@ -91,10 +94,8 @@ public class GameController : MonoBehaviour
             turnText.text = "Player 1's Turn";
         }
         currentElement = null;
-        player1.GetComponent<Monster>().hasMoved = false;
-        player2.GetComponent<Monster>().hasMoved = false;
-        player1.GetComponent<Monster>().hasAttacked = false;
-        player2.GetComponent<Monster>().hasAttacked = false;
+        player1.GetComponent<Monster>().isAttacking = false;
+        player2.GetComponent<Monster>().isAttacking = false;
     }
 
     public void GameOver(string winner)
@@ -138,5 +139,11 @@ public class GameController : MonoBehaviour
     {
         return currentPlayerIndex;
     }
+
+    public void SetSelectedElement(ElementType selectedElement)
+{
+    this.SelectedElement = selectedElement;
+}
+
 }
 

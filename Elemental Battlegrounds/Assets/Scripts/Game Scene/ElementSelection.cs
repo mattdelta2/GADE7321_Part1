@@ -1,53 +1,47 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
-public class ElementalSelection : MonoBehaviour
+public class ElementSelection : MonoBehaviour
 {
-    public List<ElementType> availableElements;
-    public List<ElementType> selectedElements;
-    public TextMesh selectedElementsText;
-    public int maxSelectedElements = 2;
+    [SerializeField] private GameController gameController;
+    [SerializeField] private Button[] elementButtons;
+    private List<ElementType> selectedElements = new List<ElementType>();
 
-    private int numSelectedElements = 0;
-
-    void Start()
+    private void Start()
     {
-        // Randomly select four elements from the list of available elements
-        int numElementsToSelect = 4;
-        while (selectedElements.Count < numElementsToSelect && availableElements.Count > 0)
+        // Enable all element buttons
+        foreach (Button button in elementButtons)
         {
-            int randomIndex = Random.Range(0, availableElements.Count);
-            ElementType randomElement = availableElements[randomIndex];
-            selectedElements.Add(randomElement);
-            availableElements.RemoveAt(randomIndex);
-        }
-
-        // Update the text to display the selected elements
-        UpdateSelectedElementsText();
-    }
-
-    public void SelectElement(ElementType element)
-    {
-        if (numSelectedElements < maxSelectedElements && !selectedElements.Contains(element))
-        {
-            selectedElements.Add(element);
-            numSelectedElements++;
-
-            // Update the text to display the selected elements
-            UpdateSelectedElementsText();
+            button.interactable = true;
         }
     }
 
-    private void UpdateSelectedElementsText()
+    public void SelectElement(int elementIndex)
     {
-        string text = "Selected Elements: ";
-        foreach (ElementType element in selectedElements)
+        // Check if the element has already been selected
+        ElementType selectedElement = (ElementType)elementIndex;
+        if (selectedElements.Contains(selectedElement))
         {
-            text += element.ToString() + " ";
+            Debug.Log("This element has already been selected.");
+            return;
         }
-        selectedElementsText.text = text;
+
+        // Add the selected element to the list
+        selectedElements.Add(selectedElement);
+
+        // Disable the selected element button
+        elementButtons[elementIndex].interactable = false;
+
+        // Check if all players have selected their element
+        if (selectedElements.Count == gameController.NumPlayers)
+        {
+            // Set the selected elements for each player in the game controller
+            gameController.SetSelectedElement(SetSelectedElementType.ToArray());
+
+            // Start the game
+            gameController.StartGameplay();
+        }
     }
-
-
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Element
+public enum ElementType
 {
     Earth,
     Water,
@@ -13,7 +13,7 @@ public enum Element
 
 public class Monster : MonoBehaviour
 {
-    public Element element;
+    public ElementType element;
     public bool isPlayer1;
     public int health = 20;
 
@@ -49,13 +49,13 @@ public class Monster : MonoBehaviour
     public int CalculateDamage(Monster otherMonster)
     {
         int damage = attackDamage;
-        if (element == Element.Water && otherMonster.element == Element.Fire ||
-            element == Element.Fire && otherMonster.element == Element.Plant ||
-            element == Element.Plant && otherMonster.element == Element.Air ||
-            element == Element.Air && otherMonster.element == Element.Earth ||
-            element == Element.Earth && otherMonster.element == Element.Lightning ||
-            element == Element.Lightning && otherMonster.element == Element.Sun ||
-            element == Element.Sun && otherMonster.element == Element.Water)
+        if (element == ElementType.Water && otherMonster.element == ElementType.Fire ||
+            element == ElementType.Fire && otherMonster.element == ElementType.Plant ||
+            element == ElementType.Plant && otherMonster.element == ElementType.Air ||
+            element == ElementType.Air && otherMonster.element == ElementType.Earth ||
+            element == ElementType.Earth && otherMonster.element == ElementType.Lightning ||
+            element == ElementType.Lightning && otherMonster.element == ElementType.Sun ||
+            element == ElementType.Sun && otherMonster.element == ElementType.Water)
         {
             damage += 1; // elemental advantage
         }
