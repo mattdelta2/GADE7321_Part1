@@ -2855,6 +2855,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714929644}
+  - component: {fileID: 1714929646}
+  - component: {fileID: 1714929645}
   m_Layer: 0
   m_Name: Battle System
   m_TagString: Untagged
@@ -2870,13 +2872,54 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714929642}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1714929645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714929642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb3f729eff4739438b404cfcfe057e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 1714929646}
+  elementButtons:
+  - {fileID: 1648434818}
+  - {fileID: 147059767}
+  - {fileID: 291835040}
+  - {fileID: 1263680724}
+--- !u!114 &1714929646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714929642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d409b1cbcca34468b99d0564b4bc37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsters: []
+  player1: {fileID: 1166149986}
+  player2: {fileID: 2101677544}
+  elements: []
+  currentElement: {fileID: 0}
+  currentTurn: 0
+  turnText: {fileID: 0}
+  player1Health: {fileID: 726728778}
+  player2Health: {fileID: 471520735}
+  gameOver: 0
+  elementCount: 00000000000000000000000000000000000000000000000000000000
 --- !u!1 &1715227581
 GameObject:
   m_ObjectHideFlags: 0
