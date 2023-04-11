@@ -4,54 +4,50 @@ using System.Collections.Generic;
 
 public class CharacterSelection : MonoBehaviour
 {
-    public Button[] elementButtons;
-    public Text[] selectedElements;
-    public string[] availableElements = { "Earth", "Water", "Fire", "Air", "Plant", "Lightning", "Sun" };
-    public string[] selectedMonster = new string[2];
-    public string[] selectedElement = new string[2];
+    public List<ElementType> availableElements;
+    public List<ElementType> selectedElements;
+    public TextMesh selectedElementsText;
+    public int maxSelectedElements = 2;
+
+    private int numSelectedElements = 0;
 
     void Start()
     {
-        // Shuffle available elements
-        System.Random rnd = new System.Random();
-        for (int i = 0; i < availableElements.Length; i++)
+        // Randomly select four elements from the list of available elements
+        int numElementsToSelect = 4;
+        while (selectedElements.Count < numElementsToSelect && availableElements.Count > 0)
         {
-            int r = i + (int)(rnd.NextDouble() * (availableElements.Length - i));
-            string temp = availableElements[r];
-            availableElements[r] = availableElements[i];
-            availableElements[i] = temp;
+            int randomIndex = Random.Range(0, availableElements.Count);
+            ElementType randomElement = availableElements[randomIndex];
+            selectedElements.Add(randomElement);
+            availableElements.RemoveAt(randomIndex);
         }
 
-        // Set element buttons text
-        for (int i = 0; i < elementButtons.Length; i++)
-        {
-            elementButtons[i].GetComponentInChildren<Text>().text = availableElements[i];
-        }
+        // Update the text to display the selected elements
+        UpdateSelectedElementsText();
     }
 
-    public void SelectMonster(string monsterName)
+    public void SelectElement(ElementType element)
     {
-        int playerIndex = GameController.Instance.GetCurrentPlayerIndex();
-        selectedMonster[playerIndex] = monsterName;
-    }
-
-    public void SelectElement(int elementIndex)
-    {
-        int playerIndex = GameController.Instance.GetCurrentPlayerIndex();
-        selectedElement[playerIndex] = availableElements[elementIndex];
-
-        // Remove selected element from available elements
-        List<string> tempList = new List<string>(availableElements);
-        tempList.RemoveAt(elementIndex);
-        availableElements = tempList.ToArray();
-
-        // Update element buttons text
-        for (int i = 0; i < elementButtons.Length; i++)
+        if (numSelectedElements < maxSelectedElements && !selectedElements.Contains(element))
         {
-            elementButtons[i].GetComponentInChildren<Text>().text = availableElements[i];
-        }
+            selectedElements.Add(element);
+            numSelectedElements++;
 
-        // Update selected elements text
-        selectedElements[playerIndex].text = "Selected Element: " + selectedElement[playerIndex];
+            // Update the text to display the selected elements
+            UpdateSelectedElementsText();
+        }
     }
+
+    private void UpdateSelectedElementsText()
+    {
+        string text = "Selected Elements: ";
+        foreach (ElementType element in selectedElements)
+        {
+            text += element.ToString() + " ";
+        }
+        selectedElementsText.text = text;
+    }
+
+    
 }
