@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 246}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &28879811
@@ -181,7 +181,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Insert Controls Here
+  m_text: "Player 1 will then have to choose if they want to Block, Attack, Heal
+    or change their element. After player 2 will have to choose between Block, Attack,
+    Heal and Changing as well.\r\nA normal attack does 3 damage. Blocking will block
+    2 damage. Healing will heal the player by 2 hp. No action can be taken more than
+    2 times in a row by the same player. \r\nWhen changing elements, the players
+    can choose between the elements in the Element pile. The player that chooses
+    to change their element first will have first choice between the available elements.
+    Once a player changes elements, their previous element will become available
+    in the Element pile.Changing elements does not reset health. \r\nAfter each player
+    has made their choices, the actions will be carried out and the round will come
+    to and end. Only one action can be taken by a player per round. There is no set
+    amount of rounds, the game continues until one of the players wins when the other
+    player\u2019s HP reaches 0.\r\nWhen attacking a monster who is blocking the amount
+    blocked is subtracted from how much Damage is being done. If there is an elemental
+    reaction the superior element deals 1 extra damage. Each player has 20 maximum
+    HP.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -208,8 +223,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -244,7 +259,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -346.82986, y: -133.91113, z: -354.86462, w: -135.25026}
+  m_margin: {x: -793.4419, y: -133.91113, z: -825.54565, w: -656.7433}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -397,7 +412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 96, y: 208}
+  m_AnchoredPosition: {x: 96, y: 483}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &418892633
@@ -536,7 +551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -170}
+  m_AnchoredPosition: {x: -26, y: -424}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &646410646
