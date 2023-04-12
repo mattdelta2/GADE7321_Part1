@@ -49,6 +49,9 @@ MonoBehaviour:
   damage: 2
   maxHP: 20
   currentHP: 20
+  attack: 0
+  defense: 0
+  element: 5
 --- !u!1 &4516254171143137939
 GameObject:
   m_ObjectHideFlags: 0

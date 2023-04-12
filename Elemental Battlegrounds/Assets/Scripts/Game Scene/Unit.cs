@@ -22,30 +22,124 @@ public class Unit : MonoBehaviour
     public int damage;
     public int maxHP;
     public int currentHP;
+    public int attack;
+    public int defense;
+    public int block;
+
+
 
     public Element element;
 
 
-    public bool TakeDamage(int dmg)
+
+    public int CalculateDamage(Unit defender)
     {
-        currentHP -= dmg;
+        int damage = attack - defender.defense;
 
+        // Check for elemental strength and weakness
+        if (element == Element.Fire && defender.element == Element.Plant)
+        {
+            damage *= 2;
+        }
+        else if (element == Element.Water && defender.element == Element.Fire)
+        {
+            damage *= 2;
+        }
+        else if (element == Element.Plant && defender.element == Element.Wind)
+        {
+            damage *= 2;
+        }
+        else if (element == Element.Wind && defender.element == Element.Earth)
+        {
+            damage *= 2;
+        }
+        else if (element == Element.Earth && defender.element == Element.Lightning)
+        {
+            damage *= 2;
+        }
+        else if (element == Element.Lightning && defender.element == Element.Sun)
+        {
+            damage *= 2;
+        }
+        else if (element == Element.Sun && defender.element == Element.Water)
+        {
+            damage *= 2;
+        }
+        else if (element == defender.element)
+        {
+            damage /= 2;
+        }
 
-        if (currentHP <= 0)
-            return true;
-        else
-            return false;
-       
+        return damage;
     }
 
 
-    public  void Heal(int amount)
+
+    public bool TakeDamage(int damage, Element attackerElement)
+    {
+        int modifiedDamage = damage;
+        if (attackerElement == Element.Fire && element == Element.Plant)
+        {
+            modifiedDamage *= 1;
+        }
+        else if (attackerElement == Element.Water && element == Element.Fire)
+        {
+            modifiedDamage *= 2;
+        }
+        else if (attackerElement == Element.Plant && element == Element.Wind)
+        {
+            modifiedDamage *= 2;
+        }
+        else if (attackerElement == Element.Wind && element == Element.Earth)
+        {
+            modifiedDamage *= 2;
+        }
+        else if (attackerElement == Element.Earth && element == Element.Lightning)
+        {
+            modifiedDamage *= 2;
+        }
+        else if (attackerElement == Element.Lightning && element == Element.Sun)
+        {
+            modifiedDamage *= 2;
+        }
+        else if (attackerElement == Element.Sun && element == Element.Water)
+        {
+            modifiedDamage *= 2;
+        }
+        else if (attackerElement == element)
+        {
+            modifiedDamage /= 2;
+        }
+
+        currentHP -= modifiedDamage;
+
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+
+    public void Heal(int amount)
     {
         currentHP += amount;
         if (currentHP > maxHP)
             currentHP = maxHP;
 
     }
+
+    public void Block(int dmg)
+    {
+        currentHP -= dmg;
+       
+
+    }    
 
 
 }

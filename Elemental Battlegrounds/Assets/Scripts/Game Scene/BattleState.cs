@@ -1,13 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public enum battleState
 {
     Start,
-    PlayerTurn,
-    EnemyTurn,
+    Player1Turn,
+    Player2Turn,
     Won,
     Lost
 }
@@ -17,9 +18,9 @@ public enum battleState
 public class BattleState : MonoBehaviour
 {
 
-    public GameObject [] PlayerPrefab;
+    public GameObject[] PlayerPrefab;
 
-    public GameObject [] EnemyPrefab;
+    public GameObject[] EnemyPrefab;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -54,7 +55,7 @@ public class BattleState : MonoBehaviour
     IEnumerator SetUpBattle()
     {
 
-        //Random Element at the start of the game for enemy
+        //Random Element at the start of the game for Player2
 
         int randomEnemyElementIndex = Random.Range(0, EnemyPrefab.Length);
         GameObject enemyUnitPrefab = EnemyPrefab[randomEnemyElementIndex];
@@ -65,9 +66,12 @@ public class BattleState : MonoBehaviour
         EnemyUnit = enemyUnit.GetComponent<Unit>();
         EnemyUnit.element = (Element)randomEnemyElementIndex;
 
+        EnemyUnit.attack = 2;
+        EnemyUnit.defense = 2;
 
 
-        //Random Element at start of game for player
+
+        //Random Element at start of game for player1
 
 
         int randomPlayerElementIndex = Random.Range(0, PlayerPrefab.Length);
@@ -78,19 +82,22 @@ public class BattleState : MonoBehaviour
         PlayerUnit = playerUnit.GetComponent<Unit>();
         PlayerUnit.element = (Element)randomPlayerElementIndex;
 
-         
+        PlayerUnit.attack = 2;
+        PlayerUnit.defense = 2;
 
-       // GameObject playerGo = Instantiate(PlayerPrefab, playerBattleStation);
+
+
+        // GameObject playerGo = Instantiate(PlayerPrefab, playerBattleStation);
         //playerGo.transform.localScale = new Vector3(.1f, .1f, 1);
 
         //playerUnit = playerGo.GetComponent<Unit>();
 
 
         //GameObject enemyGo = Instantiate(EnemyPrefab, enemyBattleStation);
-       // enemyGo.transform.localScale = new Vector3(.10f, .10f, 1);
+        // enemyGo.transform.localScale = new Vector3(.10f, .10f, 1);
         //EnemyUnit = enemyGo.GetComponent<Unit>();
 
-        dialogueText.text = "You are Currently Fighting a: " + EnemyUnit.unitName;
+        dialogueText.text = PlayerUnit.unitName + " VS " + EnemyUnit.unitName;
 
 
         playerHUD.SetUpHUD(PlayerUnit);
@@ -100,74 +107,133 @@ public class BattleState : MonoBehaviour
 
 
 
-        state = battleState.PlayerTurn;
+        state = battleState.Player1Turn;
         PlayerTurn();
 
+    }
+
+
+    IEnumerator Player2Attack()
+    {
+        bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage, EnemyUnit.element);
+
+        playerHUD.SetHP(PlayerUnit.currentHP);
+        dialogueText.text = "Player 2 did damage";
+
+        yield return new WaitForSeconds(2f);
+
+        if (isDead)
+        {
+            state = battleState.Won;
+           StartCoroutine( EndBattle());
+        }
+        else
+        {
+            state = battleState.Player1Turn;
+            PlayerTurn();
+            
+        }
     }
 
     IEnumerator PlayerAttack()
     {
 
-        bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage);
+        bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage,PlayerUnit.element);
 
 
         enemyHUD.SetHP(EnemyUnit.currentHP);
 
-        dialogueText.text = "Damage was dealt";
+        dialogueText.text = "Player 1 did Damage";
         yield return new WaitForSeconds(2f);
 
 
-        if(isDead)
+        if (isDead)
         {
             state = battleState.Won;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
-            state = battleState.EnemyTurn;
+            state = battleState.Player2Turn;
+            Player2Turn();
 
-            StartCoroutine(EnemyTurn());
+            
         }
 
 
     }
 
+
+    /*public void Attack(Unit attacker, Unit defender)
+    {
+        int damage = attacker.CalculateDamage(defender);
+        defender.TakeDamage(damage);
+
+        // Show damage in the UI
+        dialogueText.text = attacker.unitName + " attacked " + defender.unitName + " for " + damage + " damage.";
+
+        // Check if the defender is defeated
+        if (defender.currentHP <= 0)
+        {
+            dialogueText.text = defender.unitName + " has been defeated!";
+
+
+        }
+    }*/
+
+    /*
     IEnumerator EnemyTurn()
     {
         dialogueText.text = EnemyUnit.unitName + "Attacks";
         yield return new WaitForSeconds(1f);
 
-        bool isDead= PlayerUnit.TakeDamage(EnemyUnit.damage);
+        bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage,EnemyUnit.element);
 
         playerHUD.SetHP(PlayerUnit.currentHP);
 
         yield return new WaitForSeconds(1f);
 
 
-        if(isDead)
+        if (isDead)
         {
             state = battleState.Lost;
         }
         else
         {
-            state = battleState.PlayerTurn;
+            state = battleState.Player1Turn;
             PlayerTurn();
         }
+        
+
+        
 
 
 
-    }
 
-    void EndBattle()
+    }*/
+
+    IEnumerator EndBattle()
     {
-        if(state ==battleState.Won)
+        if (state == battleState.Won)
         {
-            dialogueText.text = "You won";
+            if(EnemyUnit.currentHP <=0)
+            {
+                dialogueText.text = "Player 1 Has Become Victorious";
+            }
+            else if(PlayerUnit.currentHP <=0)
+            {
+                dialogueText.text = "Player 2 Has Become Victorious";
+            }
+
+            yield return new WaitForSeconds(5);
+
+            
 
         }
-        else if(state ==battleState.Lost)
+        else if (state == battleState.Lost)
         {
             dialogueText.text = " You Lost";
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
@@ -176,13 +242,49 @@ public class BattleState : MonoBehaviour
 
         PlayerUnit.Heal(2);
         playerHUD.SetHP(PlayerUnit.currentHP);
-        dialogueText.text = "You have healed";
+        dialogueText.text = "Player 1 Has Healed for: 2HP";
 
         yield return new WaitForSeconds(2f);
 
-        state = battleState.EnemyTurn;
-        StartCoroutine(EnemyTurn());
+        state = battleState.Player2Turn;
+        Player2Turn();
 
+    }
+
+
+    IEnumerator Player2Heal()
+    {
+        EnemyUnit.Heal(2);
+        enemyHUD.SetHP(EnemyUnit.currentHP);
+        dialogueText.text = "Player 2 Has Healed for: 2HP";
+
+
+        yield return new WaitForSeconds(2f);
+        state = battleState.Player1Turn;
+        PlayerTurn();
+    }
+
+    IEnumerator Player1Block()
+    {
+        PlayerUnit.Block(2);
+        playerHUD.SetHP(PlayerUnit.currentHP);
+        dialogueText.text = "Player 1 Has blocked for 2 damage";
+
+        yield return new WaitForSeconds(2f);
+        state = battleState.Player1Turn;
+        Player2Turn();
+
+        
+    }
+
+    IEnumerator Player2Block()
+    {
+        EnemyUnit.Block(2);
+        enemyHUD.SetHP(EnemyUnit.currentHP);
+        dialogueText.text = "Player 2 has blocked for 2 damage";
+
+        yield return new WaitForSeconds(2f);
+        PlayerTurn();
     }
 
 
@@ -195,26 +297,67 @@ public class BattleState : MonoBehaviour
     }
 
 
+    public void Player2Turn()
+    {
+        dialogueText.text = "Player 2 Choose an Action";
+    }
+
+
 
     public void OnAttackButton()
     {
-        if(state != battleState.PlayerTurn)
-        
+        if (state != battleState.Player1Turn)
+
             return;
-            StartCoroutine(PlayerAttack());
-        
+        StartCoroutine(PlayerAttack());
+
+    }
+
+
+    public void Player2AttackButton()
+    {
+        if (state != battleState.Player2Turn)
+            return;
+        StartCoroutine(Player2Attack());
+    }
+
+    public void Player2HealButton()
+    {
+
+        if (state != battleState.Player2Turn)
+            return;
+        StartCoroutine(Player2Heal());
 
     }
 
     public void OnHealButton()
     {
-        if (state != battleState.PlayerTurn)
+        if (state != battleState.Player1Turn)
 
             return;
         StartCoroutine(PlayerHeal());
 
 
     }
+
+    public void Player1BlockButton()
+    {
+        if (state != battleState.Player1Turn)
+
+            return;
+        StartCoroutine(Player1Block());
+
+    }    
+
+    public void Player2BlockButton()
+    {
+        if (state != battleState.Player2Turn)
+            return;
+        StartCoroutine(Player2Block());
+
+    }
+
+
 
 
 
