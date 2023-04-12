@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4578101291531668434}
+  - component: {fileID: -2420504784674037446}
   m_Layer: 0
   m_Name: EnemyLightning
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2420504784674037446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4748358091056420457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f24542ffa3f4314189d499ed3be257b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Lightning
+  damage: 2
+  maxHP: 20
+  currentHP: 20
 --- !u!1 &7326695435179262846
 GameObject:
   m_ObjectHideFlags: 0
