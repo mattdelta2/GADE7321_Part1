@@ -24,6 +24,13 @@ public class BattleState : MonoBehaviour
 
 
 
+    public Vector2 tempX;
+    
+
+
+
+
+
     public battleState state;
     // Start is called before the first frame update
     void Start()
@@ -38,8 +45,11 @@ public class BattleState : MonoBehaviour
     void SetUpBattle()
     {
 
-        Instantiate(PlayerPrefab, playerBattleStation);
-        Instantiate(EnemyPrefab, enemyBattleStation);
+
+
+
+        Instantiate(PlayerPrefab, playerBattleStation).transform.localScale = new Vector3(.1f, .10f, 1);
+        Instantiate(EnemyPrefab, enemyBattleStation).transform.localScale = new Vector3(.10f, .10f, 1);
 
     }
   
