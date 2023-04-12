@@ -23,6 +23,8 @@ public class Unit : MonoBehaviour
     public int maxHP;
     public int currentHP;
 
+    public Element element;
+
 
     public bool TakeDamage(int dmg)
     {

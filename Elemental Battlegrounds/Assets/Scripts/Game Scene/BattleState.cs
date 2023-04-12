@@ -12,12 +12,14 @@ public enum battleState
     Lost
 }
 
+
+
 public class BattleState : MonoBehaviour
 {
 
-    public GameObject PlayerPrefab;
+    public GameObject [] PlayerPrefab;
 
-    public GameObject EnemyPrefab;
+    public GameObject [] EnemyPrefab;
 
     public Transform playerBattleStation;
     public Transform enemyBattleStation;
@@ -30,7 +32,7 @@ public class BattleState : MonoBehaviour
     public BattleHUD enemyHUD;
 
 
-    Unit playerUnit;
+    Unit PlayerUnit;
     Unit EnemyUnit;
 
 
@@ -52,20 +54,46 @@ public class BattleState : MonoBehaviour
     IEnumerator SetUpBattle()
     {
 
-        GameObject playerGo = Instantiate(PlayerPrefab, playerBattleStation);
-        playerGo.transform.localScale = new Vector3(.1f, .1f, 1);
+        //Random Element at the start of the game for enemy
 
-        playerUnit = playerGo.GetComponent<Unit>();
+        int randomEnemyElementIndex = Random.Range(0, EnemyPrefab.Length);
+        GameObject enemyUnitPrefab = EnemyPrefab[randomEnemyElementIndex];
+
+        GameObject enemyUnit = Instantiate(enemyUnitPrefab, enemyBattleStation);
+        enemyUnit.transform.localScale = new Vector3(.1f, .1f, 1);
+
+        EnemyUnit = enemyUnit.GetComponent<Unit>();
+        EnemyUnit.element = (Element)randomEnemyElementIndex;
 
 
-        GameObject enemyGo = Instantiate(EnemyPrefab, enemyBattleStation);
-        enemyGo.transform.localScale = new Vector3(.10f, .10f, 1);
-        EnemyUnit = enemyGo.GetComponent<Unit>();
+
+        //Random Element at start of game for player
+
+
+        int randomPlayerElementIndex = Random.Range(0, PlayerPrefab.Length);
+        GameObject playerUnitPrefab = PlayerPrefab[randomPlayerElementIndex];
+
+        GameObject playerUnit = Instantiate(playerUnitPrefab, playerBattleStation);
+        playerUnit.transform.localScale = new Vector3(.1f, .1f, 1);
+        PlayerUnit = playerUnit.GetComponent<Unit>();
+        PlayerUnit.element = (Element)randomPlayerElementIndex;
+
+         
+
+       // GameObject playerGo = Instantiate(PlayerPrefab, playerBattleStation);
+        //playerGo.transform.localScale = new Vector3(.1f, .1f, 1);
+
+        //playerUnit = playerGo.GetComponent<Unit>();
+
+
+        //GameObject enemyGo = Instantiate(EnemyPrefab, enemyBattleStation);
+       // enemyGo.transform.localScale = new Vector3(.10f, .10f, 1);
+        //EnemyUnit = enemyGo.GetComponent<Unit>();
 
         dialogueText.text = "You are Currently Fighting a: " + EnemyUnit.unitName;
 
 
-        playerHUD.SetUpHUD(playerUnit);
+        playerHUD.SetUpHUD(PlayerUnit);
         enemyHUD.SetUpHUD(EnemyUnit);
 
         yield return new WaitForSeconds(2f);
@@ -80,7 +108,7 @@ public class BattleState : MonoBehaviour
     IEnumerator PlayerAttack()
     {
 
-        bool isDead = EnemyUnit.TakeDamage(playerUnit.damage);
+        bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage);
 
 
         enemyHUD.SetHP(EnemyUnit.currentHP);
@@ -109,9 +137,9 @@ public class BattleState : MonoBehaviour
         dialogueText.text = EnemyUnit.unitName + "Attacks";
         yield return new WaitForSeconds(1f);
 
-        bool isDead= playerUnit.TakeDamage(EnemyUnit.damage);
+        bool isDead= PlayerUnit.TakeDamage(EnemyUnit.damage);
 
-        playerHUD.SetHP(playerUnit.currentHP);
+        playerHUD.SetHP(PlayerUnit.currentHP);
 
         yield return new WaitForSeconds(1f);
 
@@ -146,8 +174,8 @@ public class BattleState : MonoBehaviour
     IEnumerator PlayerHeal()
     {
 
-        playerUnit.Heal(2);
-        playerHUD.SetHP(playerUnit.currentHP);
+        PlayerUnit.Heal(2);
+        playerHUD.SetHP(PlayerUnit.currentHP);
         dialogueText.text = "You have healed";
 
         yield return new WaitForSeconds(2f);
