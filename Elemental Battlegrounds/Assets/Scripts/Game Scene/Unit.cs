@@ -26,7 +26,7 @@ public class Unit : MonoBehaviour
     public int currentHP;
     public int attack;
     public int defense;
-    public int block;
+    public bool block = false;
 
     
 
@@ -138,12 +138,18 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void Block(int dmg)
+ /*   public void Block()
     {
-        currentHP -= dmg;
-       
-
-    }    
+        if(block == true)
+        {
+            damage = 0;
+            block = false;
+        }
+        else if(block == false)
+        {
+            return;
+        }
+    }*/
 
 
 }

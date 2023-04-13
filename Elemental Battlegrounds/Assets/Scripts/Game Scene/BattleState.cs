@@ -100,7 +100,7 @@ public class BattleState : MonoBehaviour
         // enemyGo.transform.localScale = new Vector3(.10f, .10f, 1);
         //EnemyUnit = enemyGo.GetComponent<Unit>();
 
-        dialogueText.text = PlayerUnit.unitName + " VS " + EnemyUnit.unitName;
+        dialogueText.text ="P1:"+ PlayerUnit.unitName + " VS P2:" + EnemyUnit.unitName;
 
 
         playerHUD.SetUpHUD(PlayerUnit);
@@ -118,50 +118,65 @@ public class BattleState : MonoBehaviour
 
     IEnumerator Player2Attack()
     {
-        bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage, EnemyUnit.element);
+       // if (PlayerUnit.block == true)
+      //  {
+       //     dialogueText.text = "Player 2 Has blocked the attack";
+       // }
+       // else if(PlayerUnit.block == false)
+       // {
+            bool isDead = PlayerUnit.TakeDamage(EnemyUnit.damage, EnemyUnit.element);
 
-        playerHUD.SetHP(PlayerUnit.currentHP);
-        dialogueText.text = "Player 2 did damage";
+            playerHUD.SetHP(PlayerUnit.currentHP);
+            dialogueText.text = "Player 2 did damage";
 
-        yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2f);
 
-        if (isDead)
-        {
-            state = battleState.Won;
-           StartCoroutine( EndBattle());
-        }
-        else
-        {
-            state = battleState.Player1Turn;
-            PlayerTurn();
-            
-        }
+            if (isDead)
+            {
+                state = battleState.Won;
+                StartCoroutine(EndBattle());
+            }
+            else
+            {
+                state = battleState.Player1Turn;
+                PlayerTurn();
+
+            }
+       // }
+
     }
 
     IEnumerator PlayerAttack()
     {
+       // if (EnemyUnit.block == true)
+       // {
+            dialogueText.text = "Player2 Has blocked the attack";
 
-        bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage,PlayerUnit.element);
+      //  }
+      //  else if(EnemyUnit.block ==false)
+      //  {
+            bool isDead = EnemyUnit.TakeDamage(PlayerUnit.damage, PlayerUnit.element);
 
 
-        enemyHUD.SetHP(EnemyUnit.currentHP);
+            enemyHUD.SetHP(EnemyUnit.currentHP);
 
-        dialogueText.text = "Player 1 did Damage";
-        yield return new WaitForSeconds(2f);
+            dialogueText.text = "Player 1 did Damage";
+            yield return new WaitForSeconds(2f);
 
 
-        if (isDead)
-        {
-            state = battleState.Won;
-            StartCoroutine(EndBattle());
-        }
-        else
-        {
-            state = battleState.Player2Turn;
-            Player2Turn();
+            if (isDead)
+            {
+                state = battleState.Won;
+                StartCoroutine(EndBattle());
+            }
+            else
+            {
+                state = battleState.Player2Turn;
+                Player2Turn();
 
-            
-        }
+
+            }
+        //}
 
 
     }
@@ -269,11 +284,12 @@ public class BattleState : MonoBehaviour
 
     IEnumerator Player1Block()
     {
-        PlayerUnit.Block(2);
+        PlayerUnit.block = true;
         playerHUD.SetHP(PlayerUnit.currentHP);
         dialogueText.text = "Player 1 Has blocked for 2 damage";
 
         yield return new WaitForSeconds(2f);
+        PlayerUnit.block = false;
         state = battleState.Player1Turn;
         Player2Turn();
 
@@ -282,11 +298,13 @@ public class BattleState : MonoBehaviour
 
     IEnumerator Player2Block()
     {
-        EnemyUnit.Block(2);
+        EnemyUnit.block = true;
         enemyHUD.SetHP(EnemyUnit.currentHP);
         dialogueText.text = "Player 2 has blocked for 2 damage";
 
         yield return new WaitForSeconds(2f);
+        EnemyUnit.block = false;
+        state = battleState.Player2Turn;
         PlayerTurn();
     }
 
@@ -357,6 +375,11 @@ public class BattleState : MonoBehaviour
         if (state != battleState.Player2Turn)
             return;
         StartCoroutine(Player2Block());
+
+    }
+
+    public void DropDownSwitch()
+    {
 
     }
 
