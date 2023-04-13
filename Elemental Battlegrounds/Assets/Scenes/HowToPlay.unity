@@ -181,22 +181,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Player 1 will then have to choose if they want to Block, Attack, Heal
-    or change their element. After player 2 will have to choose between Block, Attack,
-    Heal and Changing as well.\r\nA normal attack does 3 damage. Blocking will block
-    2 damage. Healing will heal the player by 2 hp. No action can be taken more than
-    2 times in a row by the same player. \r\nWhen changing elements, the players
-    can choose between the elements in the Element pile. The player that chooses
-    to change their element first will have first choice between the available elements.
+  m_text: "Player 1 will choose if they want to block, attack, heal, or change their
+    element.\n\nHe will have to choose between blocking, attacking, healing, and
+    changing after player 2.\n\nA normal attack does 3 damage. Blocking will block
+    2 damage. Healing will heal the player by 2 HP. No action can be taken more than
+    twice in a row by the same player.\n\nWhen changing elements, the players can
+    choose between the elements in the element pile. The player who chooses to change
+    their element first will have the first choice between the available elements.
     Once a player changes elements, their previous element will become available
-    in the Element pile.Changing elements does not reset health. \r\nAfter each player
-    has made their choices, the actions will be carried out and the round will come
-    to and end. Only one action can be taken by a player per round. There is no set
-    amount of rounds, the game continues until one of the players wins when the other
-    player\u2019s HP reaches 0.\r\nWhen attacking a monster who is blocking the amount
+    in the element pile. Changing elements does not reset health.\n\nAfter each player
+    has made their choices, the actions will be carried out, and the round will come
+    to an end. Only one action can be taken by a player per round. There is no set
+    amount of rounds; the game continues until one of the players wins when the other
+    player\u2019s HP reaches 0.\n\nWhen attacking a monster who is blocking the amount
     blocked is subtracted from how much Damage is being done. If there is an elemental
-    reaction the superior element deals 1 extra damage. Each player has 20 maximum
-    HP.\r\n"
+    reaction, the superior element deals 1 extra damage. Each player has 20 maximum
+    HP.\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

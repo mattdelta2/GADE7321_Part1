@@ -290,7 +290,7 @@ public class BattleState : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         PlayerUnit.block = false;
-        state = battleState.Player1Turn;
+        state = battleState.Player2Turn;
         Player2Turn();
 
         
@@ -304,7 +304,7 @@ public class BattleState : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         EnemyUnit.block = false;
-        state = battleState.Player2Turn;
+        state = battleState.Player1Turn;
         PlayerTurn();
     }
 
