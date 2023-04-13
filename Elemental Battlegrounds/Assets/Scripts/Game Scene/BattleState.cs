@@ -31,6 +31,9 @@ public class BattleState : MonoBehaviour
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
+    Dropdown elementDropdownPlayer1;
+    Dropdown elementDropdownPlayer2;
+
 
 
     Unit PlayerUnit;
@@ -356,6 +359,9 @@ public class BattleState : MonoBehaviour
         StartCoroutine(Player2Block());
 
     }
+
+ 
+
 
 
 

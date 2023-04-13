@@ -14,6 +14,8 @@ public enum Element
     Plant
 }
 
+
+
 public class Unit : MonoBehaviour
 {
 
@@ -25,6 +27,8 @@ public class Unit : MonoBehaviour
     public int attack;
     public int defense;
     public int block;
+
+    
 
 
 
