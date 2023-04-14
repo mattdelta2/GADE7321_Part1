@@ -234,23 +234,26 @@ public class BattleState : MonoBehaviour
     {
         if (state == battleState.Won)
         {
-            if (EnemyUnit.currentHP <= 0)
+            if(EnemyUnit.currentHP <=0)
             {
                 dialogueText.text = "Player 1 Has Become Victorious";
             }
-            else if (PlayerUnit.currentHP <= 0)
+            else if(PlayerUnit.currentHP <=0)
             {
                 dialogueText.text = "Player 2 Has Become Victorious";
             }
 
             yield return new WaitForSeconds(5);
-            SceneManager.LoadScene("MainMenu");
 
-
+            
 
         }
+        else if (state == battleState.Lost)
+        {
+            dialogueText.text = " You Lost";
+            SceneManager.LoadScene("MainMenu");
+        }
     }
-
 
     IEnumerator PlayerHeal()
     {

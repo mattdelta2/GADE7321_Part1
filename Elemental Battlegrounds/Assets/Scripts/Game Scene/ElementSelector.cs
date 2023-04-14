@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class ElementSelector : MonoBehaviour
 {
-    //Implementation of Selection Elements during the fight, without changing the Health value of the players
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
