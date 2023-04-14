@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Lightning
-  damage: 2
+  damage: 3
   maxHP: 20
   currentHP: 20
   attack: 0
   defense: 0
+  block: 0
   element: 3
 --- !u!1 &7326695435179262846
 GameObject:

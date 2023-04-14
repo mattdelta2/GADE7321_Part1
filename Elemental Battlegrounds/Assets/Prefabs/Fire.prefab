@@ -46,9 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Fire
-  damage: 2
+  damage: 3
   maxHP: 20
   currentHP: 20
+  attack: 0
+  defense: 0
+  block: 0
+  element: 0
 --- !u!1 &8938111537867659424
 GameObject:
   m_ObjectHideFlags: 0
