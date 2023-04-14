@@ -150,7 +150,7 @@ public class BattleState : MonoBehaviour
     {
        // if (EnemyUnit.block == true)
        // {
-            dialogueText.text = "Player2 Has blocked the attack";
+           // dialogueText.text = "Player2 Has blocked the attack";
 
       //  }
       //  else if(EnemyUnit.block ==false)
@@ -361,7 +361,7 @@ public class BattleState : MonoBehaviour
 
     }
 
-    public void Player1BlockButton()
+    /*public void Player1BlockButton()
     {
         if (state != battleState.Player1Turn)
 
@@ -381,7 +381,7 @@ public class BattleState : MonoBehaviour
     public void DropDownSwitch()
     {
 
-    }
+    }*/
 
  
 
