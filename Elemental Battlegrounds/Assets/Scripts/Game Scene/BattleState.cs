@@ -69,8 +69,8 @@ public class BattleState : MonoBehaviour
         EnemyUnit = enemyUnit.GetComponent<Unit>();
         EnemyUnit.element = (Element)randomEnemyElementIndex;
 
-        EnemyUnit.attack = 2;
-        EnemyUnit.defense = 2;
+        EnemyUnit.attack = 3;
+        EnemyUnit.defense = 3;
 
 
 
@@ -85,8 +85,8 @@ public class BattleState : MonoBehaviour
         PlayerUnit = playerUnit.GetComponent<Unit>();
         PlayerUnit.element = (Element)randomPlayerElementIndex;
 
-        PlayerUnit.attack = 2;
-        PlayerUnit.defense = 2;
+        PlayerUnit.attack = 3;
+        PlayerUnit.defense = 3;
 
 
 
